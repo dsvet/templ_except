@@ -13,6 +13,9 @@ public:
 
 	MyString& operator=(const MyString&); // not using for swap (not efficient)
 	MyString& operator=(MyString&&);
+
+	template<typename T>
+	void friend Swap(MyString&, MyString&);
 	
 private:
 	void Construct(const char*);

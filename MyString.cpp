@@ -1,5 +1,4 @@
-#include "MyString.h"
-
+#include "stdafx.h"
 
 MyString::MyString(const char* pStr)
 {
