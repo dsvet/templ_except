@@ -7,10 +7,16 @@
 
 #include <tchar.h>
 #include <stdexcept>
-#include "templ_except.h"
 #include "MyString.h"
+#include "Swap.h"
+#include "MyStack.h"
+#include "MyStack2_List.h"
 
 #define stop __asm nop
+
+#include <iostream>
+using std::cerr;
+using std::endl;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -60,10 +66,30 @@ int _tmain(int argc, _TCHAR* argv[])
 		//push() и pop(), operator[]
 
 		MyStack<int,5> iStack(3,45);
-		MyStack<MyString,10> strStack(5);
+		MyStack<MyString,10> strStack(2);
 
 		iStack.push(9);
 		iStack.push(345);
+		try
+		{
+			iStack.push(111);
+		}
+		catch(std::out_of_range e)
+		{
+			cerr<<e.what()<<endl;
+		}
+
+		strStack.push(MyString("abc"));
+		{
+			MyString str1("Hello!");
+			MyString* str2=new MyString("world");
+			strStack.push(str1);
+			strStack.push(*str2);
+			delete str2;
+		}
+		strStack.push("qwert");
+		MyString tmp=strStack[2];
+		strStack[0]="start";
 
 		stop
 
@@ -75,7 +101,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//пользователь
 
 
-
+	stop
 
 
 

@@ -10,10 +10,10 @@ public:
 	template <typename K>
 	void push(K&& elem)
 	{
-		fpush(std::forward<T>(elem));
+		wrap_push(std::forward<T>(elem));
 	}
 
-	void fpush(T&&);
+	void wrap_push(T&&);
 
 	T pop() throw(std::out_of_range);
 	T& operator[](int ind) throw(std::out_of_range);
@@ -40,10 +40,10 @@ MyStack<T,MaxN>::MyStack(size_t N, T&& val)
 }
 
 template <typename T, size_t MaxN>
-void MyStack<T,MaxN>::fpush(T&& elem)
+void MyStack<T,MaxN>::wrap_push(T&& elem)
 {
 	if(m_size==MaxN)
-		throw std::out_of_range("The element can not be taken. MyStack is full.");
+		throw std::out_of_range("Can't insert an element. MyStack is full.");
 	m_data[m_size]=elem;
 	m_size++;
 }
@@ -52,7 +52,7 @@ template <typename T, size_t MaxN>
 T MyStack<T,MaxN>::pop()
 {
 	if(m_size==0)
-		throw std::out_of_range("Can't insert an element. MyStack is empty.");
+		throw std::out_of_range("The element can not be taken. MyStack is empty.");
 	return std::move(m_data[m_size--]);	
 }
 

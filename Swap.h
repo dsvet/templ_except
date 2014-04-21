@@ -13,4 +13,3 @@ void Swap(MyString& x, MyString& y)
 	x.m_pStr=y.m_pStr;
 	y.m_pStr=tmp;
 }
-// специализацию шаблона для MyString (шаблон сделать friend)
