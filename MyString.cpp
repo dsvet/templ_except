@@ -55,3 +55,8 @@ MyString& MyString::operator=(MyString&& other)
 
 	return* this;
 }
+
+ostream& operator<<(ostream& o, const MyString& str)
+{
+	return o<<str.m_pStr;
+}

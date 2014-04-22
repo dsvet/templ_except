@@ -17,6 +17,8 @@ public:
 	template<typename T>
 	void friend Swap(MyString&, MyString&);
 	
+	friend ostream& operator<<(ostream&,const MyString&);
+
 private:
 	void Construct(const char*);
 };

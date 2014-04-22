@@ -4,15 +4,16 @@
 //
 
 #pragma once
+#include <vld.h>
+
 
 #include "targetver.h"
+#include <iostream>
+using namespace std;
 #include <tchar.h>
 #include <stdexcept>
 #include "MyString.h"
-#include <iostream>
-
 #include <utility>
-
 
 
 // TODO: reference additional headers your program requires here
