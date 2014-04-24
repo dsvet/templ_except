@@ -15,15 +15,15 @@ public:
 
 	void wrap_push(T&&);
 
-	T pop() throw(std::out_of_range);
-	T& operator[](int ind) throw(std::out_of_range);
+	T pop(); //throw(std::out_of_range);
+	T& operator[](size_t ind); //throw(std::out_of_range);
 };
 
 
 template <typename T, size_t MaxN>
 MyStack<T,MaxN>::MyStack()
 {
-	for(int i=0;i<MaxN;i++)
+	for(size_t i=0;i<MaxN;i++)
 		m_data[i]=T();
 	m_size=MaxN;
 }
@@ -34,7 +34,7 @@ MyStack<T,MaxN>::MyStack(size_t N, T&& val)
 	if(N>MaxN)
 		throw std::out_of_range("Failed to create MyStack. Number of elements is more than capacity.");
 	m_size=N;
-	for(int i=0;i<N;i++)			
+	for(size_t i=0;i<N;i++)			
 		m_data[i]=val;
 
 }
@@ -57,7 +57,7 @@ T MyStack<T,MaxN>::pop()
 }
 
 template <typename T, size_t MaxN>
-T& MyStack<T,MaxN>::operator[](int ind)
+T& MyStack<T,MaxN>::operator[](size_t ind)
 {
 	if(ind<m_size)
 		return m_data[ind];

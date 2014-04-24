@@ -4,12 +4,17 @@
 //		шаблоны функций,
 //		шаблоны классов,
 
+
+// kostinann@mail.ru
+
 #include "stdafx.h"
+//#include <vld.h>
 #include <tchar.h>
 #include <stdexcept>
 #include "Swap.h"
 #include "MyStack.h"
 #include "MyStack2_List.h"
+#include "MyQueue.h"
 
 #define stop __asm nop
 
@@ -111,7 +116,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	stop
 
-#include <queue>
+
 
 		//Задание 3. Реализуйте шаблон очереди - MyQueue таким образом, чтобы 
 		//для хранения элементов использовался динамический массив.
@@ -119,6 +124,29 @@ int _tmain(int argc, _TCHAR* argv[])
 		//когда заполнен "хвост", в "голове" скорее всего уже имеются свободные элементы
 		//=> должен быть организован кольцевой буфер
 
-		return 0;
+	MyQueue<MyString> q;
+	q.push("a");
+	q.push("b");
+	q.push("c");
+	q.push("dog");
+	q.push("cat");
+	q.push("bird");
+	q.push("Make");
+	q.push("love");
+	q.push("not");
+	q.push("war");
+	MyString tmp=q.pop();
+	q.pop();
+	q.pop();
+	q.push("!");
+	q.push("blah-blah-bla");
+	q.push("Don't worry");
+	q.push(" be happy");
+	q.push("qwert");
+	cout<<q;
+	stop
+
+
+	return 0;
 }
 

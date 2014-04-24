@@ -9,14 +9,16 @@ class MyStack2
 		Node(const T& data){m_data=data;};
 	};
 	Node* m_pHead;
+	// + конструктор копирования (рекурсивный)
+	// оператор присваивания (общую часть перебросить, остальное copy рекурсивно)
 public:
 	MyStack2(){m_pHead=nullptr;size=0;}
 	~MyStack2();
 
 	size_t size;
 	void push(const T&);
-	void pop() throw(std::out_of_range); // remove the last element
-	T& top() throw(std::out_of_range); // just return the last element (do not remove it!)
+	void pop(); //throw(std::out_of_range); // remove the last element
+	T top() const; //throw(std::out_of_range); // just return the last element (do not remove it!)
 private:
 	void Print(ostream&,Node*) const;
 
@@ -33,7 +35,7 @@ void MyStack2<T>::push(const T& data)
 }
 
 template <typename T>
-T& MyStack2<T>::top()
+T MyStack2<T>::top() const
 {	
 	if (!m_pHead)
 		throw std::out_of_range("Error! MyStack2 is empty.");
@@ -78,10 +80,10 @@ void MyStack2<T>::Print(ostream& o,Node* node) const
 }
 
 template <typename T>
-MyStack2<T>::~MyStack2<T>()
+MyStack2<T>::~MyStack2()
 {
 	Node* tmp=m_pHead;
-	for(int i=0;i<size;i++)
+	for(size_t i=0;i<size;i++)
 	{
 		m_pHead=tmp->pNext;
 		delete tmp;
