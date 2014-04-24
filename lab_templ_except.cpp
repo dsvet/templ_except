@@ -8,7 +8,7 @@
 // kostinann@mail.ru
 
 #include "stdafx.h"
-//#include <vld.h>
+#include <vld.h>
 #include <tchar.h>
 #include <stdexcept>
 #include "Swap.h"
@@ -141,11 +141,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	q.push("!");
 	q.push("blah-blah-bla");
 	q.push("Don't worry");
-	q.push(" be happy");
+	q.push("be happy");
 	q.push("qwert");
-	cout<<q;
+	cout<<endl<<q;
 	stop
 
+	MyQueue<MyString> q2=q;
+	int i=3;
+	do {q2.pop();i--;}
+	while(i>0);
+	cout<<endl<<q2;
+
+	q=q2;
+	q.push("Something");
+	cout<<endl<<q;	
 
 	return 0;
 }

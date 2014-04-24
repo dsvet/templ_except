@@ -8,12 +8,12 @@ class MyStack2
 		Node* pNext;
 		Node(const T& data){m_data=data;};
 	};
-	Node* m_pHead;
-	// + конструктор копирования (рекурсивный)
-	// оператор присваивания (общую часть перебросить, остальное copy рекурсивно)
+	Node* m_pHead;	
 public:
 	MyStack2(){m_pHead=nullptr;size=0;}
 	~MyStack2();
+	MyStack2(const MyStack2&);
+	MyStack2& operator=(const MyStack2&);
 
 	size_t size;
 	void push(const T&);
@@ -24,6 +24,24 @@ private:
 
 	friend ostream& operator<< <T> (ostream&,const MyStack2<T>&);
 };
+
+template <typename T>
+MyStack2<T>::MyStack2(const MyStack2& s)
+{
+	*this=s;
+}
+
+template <typename T>
+MyStack2<T>& MyStack2<T>::operator=(const MyStack2& s)
+{
+	// общую часть перебросить, остальное copy рекурсивно
+	if(this!=&s)
+	{
+		
+	}
+
+	return *this;
+}
 
 template <typename T>
 void MyStack2<T>::push(const T& data)
