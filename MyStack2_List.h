@@ -21,23 +21,47 @@ public:
 	T top() const; //throw(std::out_of_range); // just return the last element (do not remove it!)
 private:
 	void Print(ostream&,Node*) const;
-
+	void Copy(Node*);
 	friend ostream& operator<< <T> (ostream&,const MyStack2<T>&);
 };
 
 template <typename T>
 MyStack2<T>::MyStack2(const MyStack2& s)
 {
+	size=0;
 	*this=s;
+}
+
+template <typename T>
+void MyStack2<T>::Copy(Node* node)
+{
+	if(node->pNext)
+		Copy(node->pNext);
+	push(node->m_data);
 }
 
 template <typename T>
 MyStack2<T>& MyStack2<T>::operator=(const MyStack2& s)
 {
-	// общую часть перебросить, остальное copy рекурсивно
 	if(this!=&s)
 	{
-		
+		Node* thisNode=m_pHead;
+		Node* otherNode=s.m_pHead;
+		if(size && s.size)
+		{
+			size_t comSize = size < s.size ? size : s.size;
+			for(size_t i=0;i<comSize;i++)
+			{
+				thisNode->m_data=otherNode->m_data; // rewrite data in existing nodes
+				thisNode=thisNode->pNext;
+				otherNode=otherNode->pNext;
+			}
+		}
+
+		Copy(otherNode);
+		m_pHead=thisNode;
+
+		size=s.size;
 	}
 
 	return *this;
