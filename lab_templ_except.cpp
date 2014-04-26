@@ -8,7 +8,7 @@
 // kostinann@mail.ru
 
 #include "stdafx.h"
-#include <vld.h>
+//#include <vld.h>
 #include <tchar.h>
 #include <stdexcept>
 #include "Swap.h"
@@ -118,12 +118,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout<<endl<<s2;
 
 		s2.pop();
-		s2.pop();
 		cout<<endl<<"\ns2: "<<s2;
 		MyStack2<MyString> s3;
 		s3.push("Abc");
 		s3.push("Def");
 		s3.push("Ghi");
+		s3.push("Jkl");
 		cout<<endl<<"\ns3: "<<s3;
 		s2=s3;
 		cout<<endl<<"\ns2: "<<s2;

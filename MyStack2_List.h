@@ -21,7 +21,7 @@ public:
 	T top() const; //throw(std::out_of_range); // just return the last element (do not remove it!)
 private:
 	void Print(ostream&,Node*) const;
-	void Copy(Node*);
+	void Copy(Node*,Node*);
 	friend ostream& operator<< <T> (ostream&,const MyStack2<T>&);
 };
 
@@ -33,11 +33,13 @@ MyStack2<T>::MyStack2(const MyStack2& s)
 }
 
 template <typename T>
-void MyStack2<T>::Copy(Node* node)
+void MyStack2<T>::Copy(Node* node,Node* p) // push nodes (all before <p>) in "right" order 
 {
-	if(node->pNext)
-		Copy(node->pNext);
+	if(node->pNext && node->pNext!=p)
+		Copy(node->pNext,p);
 	push(node->m_data);
+	
+
 }
 
 template <typename T>
@@ -47,21 +49,26 @@ MyStack2<T>& MyStack2<T>::operator=(const MyStack2& s)
 	{
 		Node* thisNode=m_pHead;
 		Node* otherNode=s.m_pHead;
+
+		size_t comSize=0;
 		if(size && s.size)
 		{
-			size_t comSize = size < s.size ? size : s.size;
-			for(size_t i=0;i<comSize;i++)
-			{
-				thisNode->m_data=otherNode->m_data; // rewrite data in existing nodes
-				thisNode=thisNode->pNext;
-				otherNode=otherNode->pNext;
-			}
+			comSize = size < s.size ? size : s.size;
+			for(size_t i=0;i<comSize-1;i++)
+				otherNode=otherNode->pNext;	
+			// Now <otherNode> points to the last node in <s> that should be pushed in our list
+			Copy(s.m_pHead,otherNode->pNext); // push extra nodes
 		}
+		else
+			Copy(otherNode,s.m_pHead); // push all nodes from <s> to our list in "right" order
 
-		Copy(otherNode);
-		m_pHead=thisNode;
-
-		size=s.size;
+		
+		for(size_t i=0;i<comSize;i++)
+		{
+			thisNode->m_data=otherNode->pNext->m_data; // rewrite data in existing nodes
+			thisNode=thisNode->pNext;
+			otherNode=otherNode->pNext;
+		}	
 	}
 
 	return *this;
